@@ -6,7 +6,7 @@ let SET_TOTAL_MOVIE_COUNT = "SET_TOTAL_MOVIE_COUNT";
 
 let initialState = {
   films: [],
-  pageSize: 7,
+  pageSize: 8,
   currentPage: 1,
   totalMovieCount: 0,
 };
@@ -44,7 +44,7 @@ export const setTotalMovieCount = (totalMovieCount) => ({
 });
 
 export const getMovies = (currentPage, pageSize) => {
-  return (dispatch) => {    debugger
+  return (dispatch) => {    
     movieAPI.getMovies(currentPage, pageSize).then((data) => {
       dispatch(setFilms(data.data.movies));
       dispatch(setTotalMovieCount(data.data.movie_count));

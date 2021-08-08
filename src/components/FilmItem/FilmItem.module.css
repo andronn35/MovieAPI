@@ -8,6 +8,16 @@
   
 }
 
+.filmItem:hover {
+  width: 208px;
+  transition: 0.2s;
+}
+
+.rating {
+  z-index: 100;
+}
+
 .filmName {
   color:white;
+  width: 200px;
 }
