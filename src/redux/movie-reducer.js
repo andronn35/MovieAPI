@@ -1,4 +1,4 @@
-import { movieAPI } from "./../api/api";
+import { movieAPI } from "../api/api";
 
 let SET_FILMS = "SET_FILMS";
 let SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
@@ -6,7 +6,7 @@ let SET_TOTAL_MOVIE_COUNT = "SET_TOTAL_MOVIE_COUNT";
 
 let initialState = {
   films: [],
-  pageSize: 8,
+  limit: 8,
   currentPage: 1,
   totalMovieCount: 0,
 };
@@ -43,9 +43,9 @@ export const setTotalMovieCount = (totalMovieCount) => ({
   totalMovieCount,
 });
 
-export const getMovies = (currentPage, pageSize) => {
+export const getMovies = (currentPage, limit) => {
   return (dispatch) => {    
-    movieAPI.getMovies(currentPage, pageSize).then((data) => {
+    movieAPI.getMovies(currentPage, limit).then((data) => {
       dispatch(setFilms(data.data.movies));
       dispatch(setTotalMovieCount(data.data.movie_count));
     });

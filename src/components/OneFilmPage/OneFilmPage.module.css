@@ -1,0 +1,13 @@
+.oneFilmPage {
+  display: grid;
+  grid-template-columns: 4fr 6fr;
+}
+
+.filmPic {
+  margin: 30px auto;
+}
+
+.filmPic img {
+  width: 350px;
+  height: 500px;
+}

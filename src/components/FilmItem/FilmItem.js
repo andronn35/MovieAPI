@@ -1,17 +1,25 @@
+
 import { NavLink } from "react-router-dom";
 import classes from "./FilmItem.module.css";
 
-const FilmItem = (props) => {
+const FilmItem = (props) => {  
+
+  const styles = {       
+    backgroundImage: `url(${props.imgUrl})`  
+  } 
+
   return (
-    <div>
-      <NavLink to='/film'>
-        <div className={classes.filmItem}>
-          <div>
-            <div className={classes.rating}>{props.filmRating}</div>
-            <div>{props.filmGenres}</div>
+    <div >
+      <div className={classes.filmCard}>
+        <NavLink to={'/film/' + props.id}>
+          <div className={classes.filmItem} style={styles}>
+            <div className={classes.detalis}>
+              <div className={classes.rating} >{props.filmRating}</div>
+              <div className={classes.genres}>{props.filmGenres}</div>
+            </div>
           </div>
-        </div>
-      </NavLink>
+        </NavLink>
+      </div>
       <div className={classes.filmName}>
         {props.filmName}
       </div>

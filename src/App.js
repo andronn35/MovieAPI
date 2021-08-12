@@ -1,4 +1,4 @@
-import { Route } from "react-router-dom"
+import { Route, BrowserRouter , Switch } from "react-router-dom"
 import FilmsList from "./components/FilmsList/FilmsList"
 import Header from "./components/Header/Header";
 import OneFilmPage from './components/OneFilmPage/OneFilmPage';
@@ -8,8 +8,12 @@ const App = () => {
   return (
     <div className={classes.app}>
       <Header />
-      <Route path='/' exact render={ () => <FilmsList /> } />
-      <Route path='/film' render={ () => <OneFilmPage /> } />
+      <BrowserRouter>
+        <Switch>
+          <Route path='/' exact render={ () => <FilmsList /> } />
+          <Route path='/film/:movieId?' render={ (props) => <OneFilmPage {...props}/> } />
+        </Switch>
+      </BrowserRouter>
     </div>
   )
 }
