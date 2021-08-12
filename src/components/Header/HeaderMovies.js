@@ -1,9 +1,9 @@
-import classes from './Header.module.css'
+import classes from './HeaderMovies.module.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { setCurrentPage, setLimit } from '../../redux/movie-reducer';
 
 
-const Header = () => {
+const HeaderMovies = () => {
 
   const currentPage = useSelector(state => state.filmsPage.currentPage)
   const limit = useSelector(state => state.filmsPage.limit)
@@ -45,4 +45,4 @@ const Header = () => {
   )
 }
 
-export default Header;
+export default HeaderMovies;

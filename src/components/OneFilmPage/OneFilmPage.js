@@ -4,6 +4,7 @@ import {withRouter} from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { getDetails } from './../../redux/details-reducer';
+import HeaderFilm from '../Header/HeaderFilm';
 
 const OneFilmPage = (props) => {  
 
@@ -26,15 +27,18 @@ const styles = {
 }  
   
   return (
-    <div className={classes.oneFilmPage}>
-      <div className={classes.filmPic} style={styles}>
-        
-      </div>
-      <div className={classes.about}>
-        <div><h1>{title}</h1></div>
-        <div>{arr}</div>
-        <div><h3>Synopsis</h3></div>
-        <div>{description}
+    <div>
+      <HeaderFilm />
+      <div className={classes.oneFilmPage}>
+        <div className={classes.filmPic} style={styles}>
+          
+        </div>
+        <div className={classes.about}>
+          <div><h1>{title}</h1></div>
+          <div>{arr}</div>
+          <div><h3>Synopsis</h3></div>
+          <div>{description}
+          </div>
         </div>
       </div>
     </div>

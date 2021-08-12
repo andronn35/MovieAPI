@@ -1,6 +1,4 @@
-/* .filmCard {
-  position: relative;  
-} */
+
 
 .filmItem {
   width: 200px;
@@ -8,29 +6,31 @@
   color:white;  
   background-size: 100% 100%;  
   border-radius: 10px;
+}
+
+.filmItem:hover {
+  filter: blur(1px);
   
 }
 
-
-/* .detalis {
-  position: relative; 
-  z-index: 5;
-  top: 30px;
-  left: 30px;  
-} */
-
-/* .filmItem:hover {  
-  transition: 0.1s;
-  filter: blur(2px);
-  
-}
- */
-/* .filmItem:hover .detalis{  
-  filter: blur(0px);
-  color: red;
-} */
 
 .filmName {
   color:white;
   width: 200px;
+  
 }
+
+.details {
+  margin-left: auto;
+margin-right: auto;
+left: 0;
+right: 0;
+
+text-align: center;
+
+}
+
+
+
+
+
