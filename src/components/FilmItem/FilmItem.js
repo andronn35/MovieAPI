@@ -1,11 +1,12 @@
 
 import { NavLink } from "react-router-dom";
 import classes from "./FilmItem.module.css";
+import box from './../../img/box.png';
 
 const FilmItem = (props) => {  
 
   const styles = {       
-    backgroundImage: `url(${props.imgUrl})`  
+    backgroundImage: `url(${props.imgUrl})`
   } 
 
   return (

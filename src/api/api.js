@@ -5,7 +5,7 @@ const instance = axios.create({
 })
 
 export const movieAPI = {
-  getMovies(currentPage, limit) {
+  getMovies(limit, currentPage) {
     return instance.get(`list_movies.json?limit=${limit}&page=${currentPage}`)
       .then(response => response.data)
   },

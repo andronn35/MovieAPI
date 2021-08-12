@@ -12,8 +12,8 @@ const FilmsList = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {    
-    dispatch(getMovies(currentPage, limit))
-  }, [currentPage, limit, dispatch])
+    dispatch(getMovies(limit, currentPage))
+  }, [limit, currentPage, dispatch])
 
   return (
     <div className={classes.filmsList}>

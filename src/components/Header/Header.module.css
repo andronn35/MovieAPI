@@ -5,3 +5,13 @@
   background-color: #1B1E21;
   color: white;
 }
+
+.selectedPage {
+  font-weight: bold;
+  color:rgb(185, 185, 185);
+  font-size: 20px;
+} 
+
+.pagination:hover {
+  cursor: pointer;
+}

@@ -3,12 +3,14 @@ import { movieAPI } from "../api/api";
 let SET_FILMS = "SET_FILMS";
 let SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
 let SET_TOTAL_MOVIE_COUNT = "SET_TOTAL_MOVIE_COUNT";
+let SET_LIMIT = "SET_LIMIT";
 
 let initialState = {
   films: [],
-  limit: 8,
-  currentPage: 1,
+  limit: 4,
+  currentPage: 3,
   totalMovieCount: 0,
+  pageSize: 8
 };
 
 const movieReduser = (state = initialState, action) => {
@@ -23,6 +25,11 @@ const movieReduser = (state = initialState, action) => {
         ...state,
         currentPage: action.currentPage,
       };
+    case SET_LIMIT:
+      return {
+        ...state,
+        limit: action.limit,
+      };  
     case SET_TOTAL_MOVIE_COUNT:
       return {
         ...state,
@@ -34,6 +41,7 @@ const movieReduser = (state = initialState, action) => {
 };
 
 export const setFilms = (movies) => ({ type: SET_FILMS, movies });
+export const setLimit = (limit) => ({ type: SET_LIMIT, limit });
 export const setCurrentPage = (currentPage) => ({
   type: SET_CURRENT_PAGE,
   currentPage,
@@ -43,11 +51,12 @@ export const setTotalMovieCount = (totalMovieCount) => ({
   totalMovieCount,
 });
 
-export const getMovies = (currentPage, limit) => {
+export const getMovies = (limit, currentPage) => {
   return (dispatch) => {    
-    movieAPI.getMovies(currentPage, limit).then((data) => {
+    movieAPI.getMovies(limit, currentPage).then((data) => {
       dispatch(setFilms(data.data.movies));
       dispatch(setTotalMovieCount(data.data.movie_count));
+      
     });
   };
 };
