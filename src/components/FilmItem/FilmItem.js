@@ -22,10 +22,11 @@ const FilmItem = (props) => {
             onMouseEnter={() => setButtonIsHovered(true)} 
             onMouseLeave={() => setButtonIsHovered(false)}
           >
+            
             {buttonIsHovered && <div className={classes.details}>
               <div className={classes.rating} >{props.filmRating}</div>
               <div className={classes.genres}>{genres}</div>
-            </div> }
+            </div>}
   
             
           </div>

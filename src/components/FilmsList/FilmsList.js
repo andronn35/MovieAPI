@@ -4,12 +4,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { getMovies } from '../../redux/movie-reducer';
 import HeaderMovies from '../Header/HeaderMovies';
+import Preloader from '../Preloader/Preloader';
 
 const FilmsList = () => {
 
   const films = useSelector(state => state.filmsPage.films)
   const currentPage = useSelector(state => state.filmsPage.currentPage)
   const limit = useSelector(state => state.filmsPage.limit)
+  const isLoading = useSelector(state => state.filmsPage.isLoading)
   const dispatch = useDispatch()
 
   useEffect(() => {    
@@ -19,7 +21,7 @@ const FilmsList = () => {
   return (
     <div>
       <HeaderMovies />
-      <div className={classes.filmsList}>
+      {isLoading ? <Preloader /> : <div className={classes.filmsList}>
         
         {films.map(item => <FilmItem 
           key={item.id}
@@ -28,7 +30,8 @@ const FilmsList = () => {
           filmRating={item.rating} 
           filmGenres={item.genres}
           imgUrl={item.medium_cover_image} />)}
-      </div>
+      </div>}
+      
     </div>
   )
 }

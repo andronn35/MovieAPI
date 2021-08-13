@@ -6,12 +6,23 @@
   color: white;
 }
 
-.selectedPage {
-  font-weight: bold;
-  color:rgb(185, 185, 185);
-  font-size: 20px;
+.pagination span.selectedPage {
+  
+  color:#606365;
+  
 } 
 
 .pagination:hover {
   cursor: pointer;
+}
+
+.pagination span {
+  border: 1px solid rgb(53, 53, 53);
+  border-radius: 20px;
+  margin: 5px;
+  padding-bottom: 2px;
+  padding-left: 6px;
+  padding-right: 10px;
+  background-color: rgb(53, 53, 53);
+  color:#299DED;
 }

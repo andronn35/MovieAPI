@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { getDetails } from './../../redux/details-reducer';
 import HeaderFilm from '../Header/HeaderFilm';
+import Preloader from '../Preloader/Preloader.js'
 
 const OneFilmPage = (props) => {  
 
@@ -14,6 +15,7 @@ const title = useSelector(state => state.detaisPage.title)
 const genres = useSelector(state => state.detaisPage.genres)
 const description = useSelector(state => state.detaisPage.description)
 const imgUrl = useSelector(state => state.detaisPage.imgUrl)
+const isLoding = useSelector(state => state.detaisPage.isLoading)
 const dispatch = useDispatch()
 
 let arr = genres.map(item => '●\u00A0' + item + '\u00A0\u00A0\u00A0')
@@ -29,7 +31,7 @@ const styles = {
   return (
     <div>
       <HeaderFilm />
-      <div className={classes.oneFilmPage}>
+      {isLoding ? <Preloader /> : <div className={classes.oneFilmPage}>
         <div className={classes.filmPic} style={styles}>
           
         </div>
@@ -40,7 +42,8 @@ const styles = {
           <div>{description}
           </div>
         </div>
-      </div>
+      </div>}
+      
     </div>
   )
 }

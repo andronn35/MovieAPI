@@ -6,11 +6,12 @@
   color:white;  
   background-size: 100% 100%;  
   border-radius: 10px;
+  
 }
 
-.filmItem:hover {
-  filter: blur(1px);
+.filmItem:hover{
   
+  filter: blur(3px);
 }
 
 
