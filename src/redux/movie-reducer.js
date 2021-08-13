@@ -11,7 +11,7 @@ let initialState = {
   limit: 8,
   currentPage: 1,
   totalMovieCount: 0,
-  isLoading: false
+  isLoading: false,
 };
 
 const movieReduser = (state = initialState, action) => {
@@ -25,7 +25,7 @@ const movieReduser = (state = initialState, action) => {
       return {
         ...state,
         isLoading: action.isLoading,
-      };  
+      };
     case SET_CURRENT_PAGE:
       return {
         ...state,
@@ -35,7 +35,7 @@ const movieReduser = (state = initialState, action) => {
       return {
         ...state,
         limit: action.limit,
-      };  
+      };
     case SET_TOTAL_MOVIE_COUNT:
       return {
         ...state,
@@ -48,7 +48,10 @@ const movieReduser = (state = initialState, action) => {
 
 export const setFilms = (movies) => ({ type: SET_FILMS, movies });
 export const setLimit = (limit) => ({ type: SET_LIMIT, limit });
-export const toggleIsLoading = (isLoading) => ({ type: TOGGLE_IS_LOADING, isLoading });
+export const toggleIsLoading = (isLoading) => ({
+  type: TOGGLE_IS_LOADING,
+  isLoading,
+});
 export const setCurrentPage = (currentPage) => ({
   type: SET_CURRENT_PAGE,
   currentPage,
@@ -59,13 +62,12 @@ export const setTotalMovieCount = (totalMovieCount) => ({
 });
 
 export const getMovies = (limit, currentPage) => {
-  return (dispatch) => {    
+  return (dispatch) => {
     dispatch(toggleIsLoading(true));
     movieAPI.getMovies(limit, currentPage).then((data) => {
       dispatch(toggleIsLoading(false));
       dispatch(setFilms(data.data.movies));
       dispatch(setTotalMovieCount(data.data.movie_count));
-      
     });
   };
 };

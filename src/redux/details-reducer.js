@@ -7,11 +7,11 @@ let SET_IMG_URL = "SET_IMG_URL";
 let TOGGLE_IS_LOADING = "TOGGLE_IS_LOADING";
 
 let initialState = {
-  title: '',
+  title: "",
   genres: [],
-  description: '',
-  imgUrl: '',
-  isLoading: false
+  description: "",
+  imgUrl: "",
+  isLoading: false,
 };
 
 const detailsReducer = (state = initialState, action) => {
@@ -25,7 +25,7 @@ const detailsReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: action.isLoading,
-      };  
+      };
     case SET_GENRES:
       return {
         ...state,
@@ -47,15 +47,20 @@ const detailsReducer = (state = initialState, action) => {
 };
 
 export const setTitle = (title) => ({ type: SET_TITLE, title });
-export const setGenres = (genres) => ({type: SET_GENRES, genres});
-export const toggleIsLoading = (isLoading) => ({ type: TOGGLE_IS_LOADING, isLoading });
-export const setDescription = (description) => ({type: SET_DESCRIPTION, description});
-export const setImgUrl = (imgUrl) => ({type: SET_IMG_URL, imgUrl});
+export const setGenres = (genres) => ({ type: SET_GENRES, genres });
+export const toggleIsLoading = (isLoading) => ({
+  type: TOGGLE_IS_LOADING,
+  isLoading,
+});
+export const setDescription = (description) => ({
+  type: SET_DESCRIPTION,
+  description,
+});
+export const setImgUrl = (imgUrl) => ({ type: SET_IMG_URL, imgUrl });
 
 export const getDetails = (movieId) => {
-  
-  return (dispatch) => { 
-    dispatch(toggleIsLoading(true));   
+  return (dispatch) => {
+    dispatch(toggleIsLoading(true));
     movieAPI.movieDetails(movieId).then((data) => {
       dispatch(toggleIsLoading(false));
       dispatch(setTitle(data.data.movie.title_long));
