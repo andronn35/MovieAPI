@@ -4,7 +4,7 @@ import star from '../../img/star.png'
 import classes from "./FilmItem.module.css";
 
 const FilmItem = (props) => {
-  let genres = props.filmGenres.map((item, index) => (
+  let genres = props.filmGenres && props.filmGenres.map((item, index) => (
     <div key={index}>{item}</div>
   ));
 

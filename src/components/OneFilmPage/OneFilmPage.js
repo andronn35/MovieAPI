@@ -18,7 +18,7 @@ const OneFilmPage = (props) => {
   const isLoding = useSelector((state) => state.detaisPage.isLoading);
   const dispatch = useDispatch();
 
-  let arr = genres.map((item) => "●\u00A0" + item + "\u00A0\u00A0\u00A0");
+  let arr = genres && genres.map((item) => "●\u00A0" + item + "\u00A0\u00A0\u00A0");
 
   useEffect(() => {
     dispatch(getDetails(movieId));

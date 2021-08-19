@@ -2,7 +2,7 @@ import { movieAPI } from "../api/api";
 
 let SET_FILMS = "SET_FILMS";
 let SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
-let SET_TOTAL_MOVIE_COUNT = "SET_TOTAL_MOVIE_COUNT";
+
 let SET_LIMIT = "SET_LIMIT";
 let TOGGLE_IS_LOADING = "TOGGLE_IS_LOADING";
 
@@ -36,11 +36,7 @@ const movieReduser = (state = initialState, action) => {
         ...state,
         limit: action.limit,
       };
-    case SET_TOTAL_MOVIE_COUNT:
-      return {
-        ...state,
-        totalMovieCount: action.totalMovieCount,
-      };
+    
     default:
       return state;
   }
@@ -56,10 +52,7 @@ export const setCurrentPage = (currentPage) => ({
   type: SET_CURRENT_PAGE,
   currentPage,
 });
-export const setTotalMovieCount = (totalMovieCount) => ({
-  type: SET_TOTAL_MOVIE_COUNT,
-  totalMovieCount,
-});
+
 
 export const getMovies = (limit, currentPage) => {
   return (dispatch) => {
@@ -67,7 +60,7 @@ export const getMovies = (limit, currentPage) => {
     movieAPI.getMovies(limit, currentPage).then((data) => {
       dispatch(toggleIsLoading(false));
       dispatch(setFilms(data.data.movies));
-      dispatch(setTotalMovieCount(data.data.movie_count));
+      
     });
   };
 };

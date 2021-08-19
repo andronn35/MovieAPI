@@ -7,11 +7,18 @@ const HeaderMovies = () => {
 
   const currentPage = useSelector(state => state.filmsPage.currentPage)
   const limit = useSelector(state => state.filmsPage.limit)
-  const dispatch = useDispatch();
+  const dispatch = useDispatch();  
 
   let pages = [];
-  for (let i = 1; i <= 5; i++) {
-    pages.push(i)
+  for (let i = 1; i <= currentPage; i++) {
+    switch (currentPage) {
+      case 1: pages = [i, i+1, i+2, i+3, i+4];
+        break;
+      case 2: pages = [i-1, i, i+1, i+2, i+3];
+        break;
+      default: pages = [i-2, i-1, i, i+1, i+2]
+    }
+    
   }
 
   let limitArr = [4, 8, 20]
