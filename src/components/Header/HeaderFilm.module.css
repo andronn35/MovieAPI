@@ -6,3 +6,8 @@
   color: white;
 }
 
+@media (max-width:767px) {
+  .header {
+    padding: 10px 30px;
+  }
+}
