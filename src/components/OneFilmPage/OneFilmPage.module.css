@@ -3,6 +3,16 @@
   grid-template-columns: 4fr 6fr;
   color: rgb(199, 199, 199)
 }
+@media (max-width:1200px) {
+  .oneFilmPage {
+    display: block;
+    max-width: 970px;
+    padding-left: 20px;
+  }
+  .filmPic {
+    display: none;
+  }
+}
 
 .filmPic {
   margin: 30px auto;

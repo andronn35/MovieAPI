@@ -1,13 +1,39 @@
 .header {
+  max-width: 1600px;
+  margin: 0 auto;
   display: flex;
   justify-content: space-between;
   padding: 10px 70px;
   background-color: #1B1E21;
   color: white;
 }
+@media (max-width:767px) {  
+  .logo {
+    display: none;    
+  }  
+  .header {
+    display: block;
+  }
+  .pagination {
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;    
+  }
+  .pagination div {
+    padding-bottom: 10px;
+    padding-top: 10px;
+  }
+  .header {
+    padding: 0;
+  }
+}
 
-.pagination span.selectedPage {
-  
+.pagination {
+  display: flex;
+  justify-content: space-between;
+}
+
+.pagination span.selectedPage {  
   color:#606365;
   
 } 

@@ -1,9 +1,27 @@
+
 .filmsList {  
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 30px 15px;
   background-color: rgb(53, 53, 53);
   display: grid;
   /* grid-template-columns: repeat(4, 1fr); */
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  grid-gap: 20px;
-  padding-top: 30px;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-gap: 20px;  
   justify-items: center; 
+}
+@media (max-width:1200px) {
+  .filmsList {
+    max-width: 970px;
+  }
+}
+@media (max-width:992px) {
+  .filmsList {
+    max-width: 750px;
+  }
+}
+@media (max-width:767px) {
+  .filmsList {
+    max-width: none;
+  }
 }
