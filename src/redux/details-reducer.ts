@@ -6,6 +6,8 @@ let SET_DESCRIPTION = "SET_DESCRIPTION";
 let SET_IMG_URL = "SET_IMG_URL";
 let TOGGLE_IS_LOADING = "TOGGLE_IS_LOADING";
 
+type InitialStateType = typeof initialState
+
 let initialState = {
   title: "",
   genres: [],
@@ -14,7 +16,7 @@ let initialState = {
   isLoading: false,
 };
 
-const detailsReducer = (state = initialState, action) => {
+const detailsReducer = (state = initialState, action: any): InitialStateType => {
   switch (action.type) {
     case SET_TITLE:
       return {
@@ -46,22 +48,46 @@ const detailsReducer = (state = initialState, action) => {
   }
 };
 
-export const setTitle = (title) => ({ type: SET_TITLE, title });
-export const setGenres = (genres) => ({ type: SET_GENRES, genres });
-export const toggleIsLoading = (isLoading) => ({
+type setTitleActionType = {
+  type: typeof SET_TITLE
+  title: string
+}
+export const setTitle = (title: string): setTitleActionType => ({ type: SET_TITLE, title });
+
+type setGenresActionType = {
+  type: typeof SET_GENRES
+  genres: string[]
+}
+export const setGenres = (genres: string[]): setGenresActionType => ({ type: SET_GENRES, genres });
+
+type toggleIsLoadingActionType = {
+  type: typeof TOGGLE_IS_LOADING
+  isLoading: boolean
+}
+export const toggleIsLoading = (isLoading: boolean): toggleIsLoadingActionType => ({
   type: TOGGLE_IS_LOADING,
   isLoading,
 });
-export const setDescription = (description) => ({
+
+type setDescriptionActionType = {
+  type: typeof SET_DESCRIPTION
+  description: string
+}
+export const setDescription = (description: string): setDescriptionActionType => ({
   type: SET_DESCRIPTION,
   description,
 });
-export const setImgUrl = (imgUrl) => ({ type: SET_IMG_URL, imgUrl });
 
-export const getDetails = (movieId) => {
-  return (dispatch) => {
+type setImgUrlActionType = {
+  type: typeof SET_IMG_URL
+  imgUrl: string
+}
+export const setImgUrl = (imgUrl: string): setImgUrlActionType => ({ type: SET_IMG_URL, imgUrl });
+
+export const getDetails = (movieId: number) => {
+  return (dispatch: any) => {
     dispatch(toggleIsLoading(true));
-    movieAPI.movieDetails(movieId).then((data) => {
+    movieAPI.movieDetails(movieId).then((data: any) => {
       dispatch(toggleIsLoading(false));
       dispatch(setTitle(data.data.movie.title_long));
       dispatch(setGenres(data.data.movie.genres));

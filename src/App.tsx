@@ -5,8 +5,7 @@ import classes from './App.module.css';
 
 const App = () => {
   return (
-    <div className={classes.app}>
-      
+    <div className={classes.app}>      
       <BrowserRouter>
         <Switch>
           <Route path='/' exact render={ () => <FilmsList /> } />

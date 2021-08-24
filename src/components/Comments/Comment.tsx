@@ -2,11 +2,11 @@ import classes from "./Comment.module.css";
 import { useState } from "react";
 import cross from "../../img/cross.png";
 
-const Comment = () => {
-  let [commentsList, setCommentsList] = useState([]);
+const Comment: React.FC = () => {
+  let [commentsList, setCommentsList] = useState<string[]>([]);
   let [comment, setComment] = useState("");
 
-  let onCrossClick = (index) => {
+  let onCrossClick = (index: number) => {
     const newCommentsArr = [...commentsList];
     newCommentsArr.splice(index, 1);
     setCommentsList(newCommentsArr);
@@ -21,13 +21,19 @@ const Comment = () => {
     </div>
   ));
 
-  let onAddClick = () => {
+  let onAddClick = () => {    
     comment && setCommentsList([...commentsList, comment]);
     setComment("");
   };
 
-  let onInputChange = (e) => {
-    setComment(e.target.value);
+  let onFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    comment && setCommentsList([...commentsList, comment]);
+    setComment("");
+  };
+
+  let onInputChange = (e: React.FormEvent<HTMLInputElement>) => {
+    setComment((e.target as HTMLInputElement).value);
   };
 
   return (
@@ -37,13 +43,15 @@ const Comment = () => {
       </div>
       <div>{commentElement}</div>
       <div className={classes.form}>
-        <input
-          type="text"
-          onChange={onInputChange}
-          value={comment}
-          placeholder="enter comment"
-        />
-        <button onClick={onAddClick}>add</button>
+        <form onSubmit={onFormSubmit}>
+          <input
+            type="text"
+            onChange={onInputChange}
+            value={comment}
+            placeholder="enter comment"
+          />
+          <button type="submit" onClick={onAddClick}>add</button>
+        </form>
       </div>
     </div>
   );

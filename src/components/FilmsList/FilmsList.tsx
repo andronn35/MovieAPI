@@ -1,17 +1,18 @@
 import classes from './FilmsList.module.css'
-import FilmItem from './../FilmItem/FilmItem';
+import FilmItem from '../FilmItem/FilmItem';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { getMovies } from '../../redux/movie-reducer';
 import HeaderMovies from '../Header/HeaderMovies';
 import Preloader from '../Preloader/Preloader';
+import { AppStateType } from '../../redux/store';
 
-const FilmsList = () => {
+const FilmsList: React.FC = () => {
 
-  const films = useSelector(state => state.filmsPage.films)
-  const currentPage = useSelector(state => state.filmsPage.currentPage)
-  const limit = useSelector(state => state.filmsPage.limit)
-  const isLoading = useSelector(state => state.filmsPage.isLoading)
+  const films = useSelector((state: AppStateType) => state.filmsPage.films)
+  const currentPage = useSelector((state: AppStateType) => state.filmsPage.currentPage)
+  const limit = useSelector((state: AppStateType) => state.filmsPage.limit)
+  const isLoading = useSelector((state: AppStateType) => state.filmsPage.isLoading)
   const dispatch = useDispatch()
 
   useEffect(() => {    
@@ -26,10 +27,10 @@ const FilmsList = () => {
         {films.map(item => <FilmItem 
           key={item.id}
           id={item.id}
-          filmName={item.title} 
-          filmRating={item.rating} 
-          filmGenres={item.genres}
-          imgUrl={item.medium_cover_image} />)}
+          title={item.title}
+          rating={item.rating} 
+          genres={item.genres}
+          medium_cover_image={item.medium_cover_image} />)}
       </div>}
       
     </div>

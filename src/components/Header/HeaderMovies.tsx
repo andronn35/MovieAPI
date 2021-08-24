@@ -1,15 +1,16 @@
 import classes from './HeaderMovies.module.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { setCurrentPage, setLimit } from '../../redux/movie-reducer';
+import { AppStateType } from '../../redux/store';
 
 
-const HeaderMovies = () => {
+const HeaderMovies: React.FC = () => {
 
-  const currentPage = useSelector(state => state.filmsPage.currentPage)
-  const limit = useSelector(state => state.filmsPage.limit)
+  const currentPage = useSelector((state: AppStateType) => state.filmsPage.currentPage)
+  const limit = useSelector((state: AppStateType) => state.filmsPage.limit)
   const dispatch = useDispatch();  
 
-  let pages = [];
+  let pages: number[] = [];
   for (let i = 1; i <= currentPage; i++) {
     switch (currentPage) {
       case 1: pages = [i, i+1, i+2, i+3, i+4];
@@ -32,7 +33,7 @@ const HeaderMovies = () => {
           Show by &nbsp;
           {limitArr.map((l, index) => {
             return (
-              <span  className={limit === l && classes.selectedPage} 
+              <span className={limit === l ? classes.selectedPage : ''} 
                 key={index}
                 onClick={() => dispatch(setLimit(l))}
               >{" " + l}</span>
@@ -42,7 +43,7 @@ const HeaderMovies = () => {
         <div>
           {pages.map((p, index) => {
             return (
-              <span className={currentPage === p && classes.selectedPage}
+              <span className={currentPage === p ? classes.selectedPage : ''}
                 key={index}              
                 onClick={() => dispatch(setCurrentPage(p))}
               >

@@ -37,7 +37,7 @@
 }
 
 @media (max-width:767px) {
-  .form {
+  .form form {
     display: flex;
     margin-bottom: 20px;
   }
