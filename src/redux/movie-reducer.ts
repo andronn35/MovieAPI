@@ -1,7 +1,4 @@
-
-
 import { movieAPI } from "../api/api";
-
 
 let SET_FILMS = "SET_FILMS";
 let SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
@@ -24,8 +21,6 @@ let initialState = {
   totalMovieCount: 0,
   isLoading: false,
 };
-
-
 
 const movieReduser = (state = initialState, action: any): InitislStateType => {
   switch (action.type) {
@@ -83,15 +78,12 @@ export const toggleIsLoading = (isLoading: boolean): toggleIsLoadingActionType =
     currentPage,
   })
 
-
-
 export const getMovies = (limit: number, currentPage: number): any => {
   return (dispatch: any) => {
     dispatch(toggleIsLoading(true));
     movieAPI.getMovies(limit, currentPage).then((data: any) => {
       dispatch(toggleIsLoading(false));
-      dispatch(setFilms(data.data.movies));
-      
+      dispatch(setFilms(data.data.movies));      
     });
   };
 };

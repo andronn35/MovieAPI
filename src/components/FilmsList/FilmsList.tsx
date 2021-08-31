@@ -22,8 +22,7 @@ const FilmsList: React.FC = () => {
   return (
     <div>
       <HeaderMovies />
-      {isLoading ? <Preloader /> : <div className={classes.filmsList}>
-        
+      {isLoading ? <Preloader /> : <div className={classes.filmsList}>        
         {films.map(item => <FilmItem 
           key={item.id}
           id={item.id}
@@ -31,8 +30,7 @@ const FilmsList: React.FC = () => {
           rating={item.rating} 
           genres={item.genres}
           medium_cover_image={item.medium_cover_image} />)}
-      </div>}
-      
+      </div>}      
     </div>
   )
 }

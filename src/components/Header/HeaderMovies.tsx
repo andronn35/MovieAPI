@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setCurrentPage, setLimit } from '../../redux/movie-reducer';
 import { AppStateType } from '../../redux/store';
 
-
 const HeaderMovies: React.FC = () => {
 
   const currentPage = useSelector((state: AppStateType) => state.filmsPage.currentPage)
@@ -26,8 +25,7 @@ const HeaderMovies: React.FC = () => {
 
   return (
     <div className={classes.header}>
-      <div className={classes.logo}>Movies</div>
-      
+      <div className={classes.logo}>Movies</div>      
       <div className={classes.pagination}>
         <div>
           Show by &nbsp;
