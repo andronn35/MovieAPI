@@ -1,4 +1,4 @@
-import preloader from '../../img/preloader.gif'
+import preloader from '../../img/Eclipse1.gif'
 import classes from './Preloader.module.css'
 
 const Preloader = () => {
@@ -10,3 +10,4 @@ const Preloader = () => {
 }
 
 export default Preloader;
+

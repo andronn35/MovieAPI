@@ -3,7 +3,7 @@
   grid-template-columns: 4fr 6fr;
   color: rgb(199, 199, 199)
 }
-@media (max-width:1200px) {
+@media (max-width:1100px) {
   .oneFilmPage {
     display: block;
     max-width: 970px;
