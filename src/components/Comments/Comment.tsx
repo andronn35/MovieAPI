@@ -1,10 +1,19 @@
 import classes from "./Comment.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { v4 as uuidv4 } from 'uuid';
 import cross from "../../img/cross.png";
 
 const Comment: React.FC = () => {
-  let [commentsList, setCommentsList] = useState<string[]>([]);
-  let [comment, setComment] = useState("");
+
+  let [comment, setComment] = useState('');  
+  let [commentsList, setCommentsList] = useState(    
+    JSON.parse(localStorage.getItem('commentsList') || '[]')
+  );  
+
+  useEffect(() => {
+    localStorage.setItem("commentsList", JSON.stringify(commentsList))
+    console.log(localStorage)    
+  }, [commentsList])
 
   let onCrossClick = (index: number) => {
     const newCommentsArr = [...commentsList];
@@ -12,19 +21,25 @@ const Comment: React.FC = () => {
     setCommentsList(newCommentsArr);
   };
 
-  let commentElement = commentsList.map((item, index) => (
+  let commentElement = commentsList.map((item: any, index: number) => (
     <div className={classes.commentElement} key={index}>
-      <div>{item}</div>
+      <div>{item.comment}</div>
       <div onClick={() => onCrossClick(index)}>
         <img src={cross} alt="cross" width="15px" height="15px" />
       </div>
     </div>
   ));
 
-  let onAddClick = () => {    
-    comment && setCommentsList([...commentsList, comment]);
-    setComment("");
-  };
+  const onAddClick = () => {
+    if (comment.trim() !== '') {
+      const commentItem = {
+        id: uuidv4(),
+        comment: comment
+      }
+      setCommentsList((commentsList: any) => [...commentsList, commentItem])
+      setComment('')
+    }
+  }
 
   let onFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
