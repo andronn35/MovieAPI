@@ -1,4 +1,4 @@
-import preloader from '../../img/Eclipse1.gif'
+import preloader from '../../img/Ell.gif'
 import classes from './Preloader.module.css'
 
 const Preloader = () => {

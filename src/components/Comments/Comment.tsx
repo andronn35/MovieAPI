@@ -9,8 +9,8 @@ type PropsType = {
 
 const Comment: React.FC<PropsType> = (props) => {
 
-  let [comment, setComment] = useState('');  
-  let [commentsList, setCommentsList] = useState(    
+  let [comment, setComment] = useState<string>('');  
+  let [commentsList, setCommentsList] = useState<Array<string | number>>(    
     JSON.parse(localStorage.getItem('commentsList') || '[]')
   );   
 
@@ -22,8 +22,7 @@ const Comment: React.FC<PropsType> = (props) => {
     setCommentsList(commentsList.filter((item: any) => item.id !== id))
   };
 
-  let showedComments = commentsList.filter((item: any) => item.commentMovieId === props.movieId)
-  console.log(commentsList);  
+  let showedComments = commentsList.filter((item: any) => item.commentMovieId === props.movieId) 
 
   let commentElement = showedComments.map((item: any) => (
     <div className={classes.commentElement} key={item.id}>
@@ -54,9 +53,7 @@ const Comment: React.FC<PropsType> = (props) => {
 
   let onInputChange = (e: React.FormEvent<HTMLInputElement>) => {
     setComment((e.target as HTMLInputElement).value);
-  };
-
-  
+  };  
 
   return (
     <div className={classes.comment}>

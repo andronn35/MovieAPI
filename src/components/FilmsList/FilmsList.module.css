@@ -1,7 +1,36 @@
+
+
+.buttons {  
+  max-width: 1680px;
+  text-align: end;
+  margin: 0 auto;  
+  padding-right: 60px;
+  background: linear-gradient(#1B1E21, rgb(53, 53, 53));
+}
+
+.buttons span {
+  color: white;
+}
+
+.buttons button {
+  margin: 10px;
+  margin-bottom: 0;
+  border: 1px solid #3c3f42;
+  background-color: #3c3f42;
+  padding: 10px;
+  border-radius: 20px;
+  color:#299DED;
+}
+
+.buttons button:hover {
+  cursor: pointer;
+  background-color: #2a2d30;
+}
+
 .filmsList {  
   max-width: 1200px;
   margin: 0 auto;
-  padding: 30px 15px;
+  padding: 15px;
   background-color: rgb(53, 53, 53);
   display: grid;
   /* grid-template-columns: repeat(4, 1fr); */
@@ -22,5 +51,9 @@
 @media (max-width:767px) {
   .filmsList {
     max-width: none;
+  }
+  .buttons {
+    padding-right: 0;
+    text-align: center;
   }
 }
