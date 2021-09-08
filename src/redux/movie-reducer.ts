@@ -4,11 +4,13 @@ let SET_FILMS = "SET_FILMS";
 let SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
 let SET_LIMIT = "SET_LIMIT";
 let TOGGLE_IS_LOADING = "TOGGLE_IS_LOADING";
+let SORT_BY_RATING = "SORT_BY_RATING";
+let SORT_BY_YEAR = "SORT_BY_YEAR";
 
 type InitislStateType = typeof initialState
 type FilmsType = {
   id: number          
-  title: string
+  title_long: string
   rating: number
   genres: string[]
   medium_cover_image: string
@@ -29,6 +31,17 @@ const movieReduser = (state = initialState, action: any): InitislStateType => {
         ...state,
         films: action.movies,        
       };
+    case SORT_BY_RATING:
+      return {
+        ...state,
+        films: [...state.films.sort((a: any, b: any) => a.rating - b.rating)]
+      };
+    case SORT_BY_YEAR:
+      return {
+        ...state,
+        films: [...state.films.sort((a: any, b: any) => a.year - b.year)]
+      } 
+      
     case TOGGLE_IS_LOADING:
       return {
         ...state,
@@ -68,6 +81,8 @@ type setCurrentPageActionType = {
 }
 
 export const setFilms = (movies: Array<FilmsType>): setFilmsActionType => ({ type: SET_FILMS, movies })
+export const sortByRating = () => ({ type: SORT_BY_RATING })
+export const sortByYear = () => ({ type: SORT_BY_YEAR })
 export const setLimit = (limit: number): setLimitActionType => ({ type: SET_LIMIT, limit })
 export const toggleIsLoading = (isLoading: boolean): toggleIsLoadingActionType => ({
     type: TOGGLE_IS_LOADING,

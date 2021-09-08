@@ -1,30 +1,49 @@
 import classes from "./Comment.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { v4 as uuidv4 } from 'uuid';
 import cross from "../../img/cross.png";
 
-const Comment: React.FC = () => {
-  let [commentsList, setCommentsList] = useState<string[]>([]);
-  let [comment, setComment] = useState("");
+type PropsType = {
+  movieId: number
+}
 
-  let onCrossClick = (index: number) => {
-    const newCommentsArr = [...commentsList];
-    newCommentsArr.splice(index, 1);
-    setCommentsList(newCommentsArr);
+const Comment: React.FC<PropsType> = (props) => {
+
+  let [comment, setComment] = useState<string>('');  
+  let [commentsList, setCommentsList] = useState<Array<string | number>>(    
+    JSON.parse(localStorage.getItem('commentsList') || '[]')
+  );   
+
+  useEffect(() => {
+    localStorage.setItem("commentsList", JSON.stringify(commentsList))    
+  }, [commentsList])
+
+  let onCrossClick = (id: any) => {
+    setCommentsList(commentsList.filter((item: any) => item.id !== id))
   };
 
-  let commentElement = commentsList.map((item, index) => (
-    <div className={classes.commentElement} key={index}>
-      <div>{item}</div>
-      <div onClick={() => onCrossClick(index)}>
+  let showedComments = commentsList.filter((item: any) => item.commentMovieId === props.movieId) 
+
+  let commentElement = showedComments.map((item: any) => (
+    <div className={classes.commentElement} key={item.id}>
+      <div>{item.comment}</div>
+      <div onClick={() => onCrossClick(item.id)}>
         <img src={cross} alt="cross" width="15px" height="15px" />
       </div>
     </div>
   ));
 
-  let onAddClick = () => {    
-    comment && setCommentsList([...commentsList, comment]);
-    setComment("");
-  };
+  const onAddClick = () => {
+    if (comment.trim() !== '') {
+      const commentItem = {
+        id: uuidv4(),
+        comment: comment,
+        commentMovieId: props.movieId
+      }
+      setCommentsList((commentsList: any) => [...commentsList, commentItem])
+      setComment('')
+    }
+  }
 
   let onFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -34,7 +53,7 @@ const Comment: React.FC = () => {
 
   let onInputChange = (e: React.FormEvent<HTMLInputElement>) => {
     setComment((e.target as HTMLInputElement).value);
-  };
+  };  
 
   return (
     <div className={classes.comment}>
