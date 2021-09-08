@@ -3,28 +3,32 @@ import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
 import cross from "../../img/cross.png";
 
-const Comment: React.FC = () => {
+type PropsType = {
+  movieId: number
+}
+
+const Comment: React.FC<PropsType> = (props) => {
 
   let [comment, setComment] = useState('');  
   let [commentsList, setCommentsList] = useState(    
     JSON.parse(localStorage.getItem('commentsList') || '[]')
-  );  
+  );   
 
   useEffect(() => {
-    localStorage.setItem("commentsList", JSON.stringify(commentsList))
-    console.log(localStorage)    
+    localStorage.setItem("commentsList", JSON.stringify(commentsList))    
   }, [commentsList])
 
-  let onCrossClick = (index: number) => {
-    const newCommentsArr = [...commentsList];
-    newCommentsArr.splice(index, 1);
-    setCommentsList(newCommentsArr);
+  let onCrossClick = (id: any) => {
+    setCommentsList(commentsList.filter((item: any) => item.id !== id))
   };
 
-  let commentElement = commentsList.map((item: any, index: number) => (
-    <div className={classes.commentElement} key={index}>
+  let showedComments = commentsList.filter((item: any) => item.commentMovieId === props.movieId)
+  console.log(commentsList);  
+
+  let commentElement = showedComments.map((item: any) => (
+    <div className={classes.commentElement} key={item.id}>
       <div>{item.comment}</div>
-      <div onClick={() => onCrossClick(index)}>
+      <div onClick={() => onCrossClick(item.id)}>
         <img src={cross} alt="cross" width="15px" height="15px" />
       </div>
     </div>
@@ -34,7 +38,8 @@ const Comment: React.FC = () => {
     if (comment.trim() !== '') {
       const commentItem = {
         id: uuidv4(),
-        comment: comment
+        comment: comment,
+        commentMovieId: props.movieId
       }
       setCommentsList((commentsList: any) => [...commentsList, commentItem])
       setComment('')
@@ -50,6 +55,8 @@ const Comment: React.FC = () => {
   let onInputChange = (e: React.FormEvent<HTMLInputElement>) => {
     setComment((e.target as HTMLInputElement).value);
   };
+
+  
 
   return (
     <div className={classes.comment}>

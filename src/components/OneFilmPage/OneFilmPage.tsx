@@ -47,7 +47,7 @@ const OneFilmPage: React.FC<RouteComponentProps> = (props) => {
             </div>
             <div>{description}</div>
             <div>
-              <Comment />
+              <Comment movieId={movieId}/>
             </div>
           </div>
         </div>
