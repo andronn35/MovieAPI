@@ -4,7 +4,9 @@
   color:white;  
   background-size: 100% 100%;  
   border-radius: 10px;
+  border: 1px solid rgb(63, 63, 63);
   position: relative;
+  box-shadow: 8px 8px 8px 0px rgba(0, 0, 0, 0.8);
 }
 
 .filmItem:hover .details{
@@ -13,6 +15,7 @@
 }
 
 .filmName {
+  margin-top: 10px;
   color:white;
   width: 200px;  
 }

@@ -1,23 +1,19 @@
 import classes from './FilmsList.module.css'
 import FilmItem from '../FilmItem/FilmItem';
-import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { getMovies, sortByRating, sortByYear } from '../../redux/movie-reducer';
 import HeaderMovies from '../Header/HeaderMovies';
 import Preloader from '../Preloader/Preloader';
-import { AppStateType } from '../../redux/store';
+import { useTypedSelector } from './../../hooks/useTypedSelector';
+import { useActions } from './../../hooks/useActions';
 
 const FilmsList: React.FC = () => {
 
-  const films = useSelector((state: AppStateType) => state.filmsPage.films)
-  const currentPage = useSelector((state: AppStateType) => state.filmsPage.currentPage)
-  const limit = useSelector((state: AppStateType) => state.filmsPage.limit)
-  const isLoading = useSelector((state: AppStateType) => state.filmsPage.isLoading)
-  const dispatch = useDispatch()
+  const {films, currentPage, limit, isLoading} = useTypedSelector(state => state.movies)
+  const {getMovies, sortByRating, sortByYear} = useActions()
 
   useEffect(() => {    
-    dispatch(getMovies(limit, currentPage))
-  }, [limit, currentPage, dispatch])
+    (getMovies(limit, currentPage))
+  }, [limit, currentPage])
 
   return (
     <div className={classes.filmsListContainer}>
@@ -25,12 +21,12 @@ const FilmsList: React.FC = () => {
       <div className={classes.buttons}>
         <span>Sort by</span>
         <button
-          onClick={() => dispatch(sortByRating())}
+          onClick={() => sortByRating()}
         >
           by rating
         </button>
         <button
-          onClick={() => dispatch(sortByYear())}
+          onClick={() => sortByYear()}
         >
           by premiere year
         </button>

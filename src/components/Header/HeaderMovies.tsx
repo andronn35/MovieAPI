@@ -1,13 +1,11 @@
 import classes from './HeaderMovies.module.css'
-import { useDispatch, useSelector } from 'react-redux';
-import { setCurrentPage, setLimit } from '../../redux/movie-reducer';
-import { AppStateType } from '../../redux/store';
+import { useTypedSelector } from './../../hooks/useTypedSelector';
+import { useActions } from './../../hooks/useActions';
 
 const HeaderMovies: React.FC = () => {
 
-  const currentPage = useSelector((state: AppStateType) => state.filmsPage.currentPage)
-  const limit = useSelector((state: AppStateType) => state.filmsPage.limit)
-  const dispatch = useDispatch();  
+  const {currentPage, limit} = useTypedSelector(state => state.movies)
+  const {setCurrentPage, setLimit} = useActions() 
 
   let pages: number[] = [];
   for (let i = 1; i <= currentPage; i++) {
@@ -33,7 +31,7 @@ const HeaderMovies: React.FC = () => {
             return (
               <span className={limit === l ? classes.selectedPage : ''} 
                 key={index}
-                onClick={() => dispatch(setLimit(l))}
+                onClick={() => setLimit(l)}
               >{" " + l}</span>
             )
           })} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -43,7 +41,7 @@ const HeaderMovies: React.FC = () => {
             return (
               <span className={currentPage === p ? classes.selectedPage : ''}
                 key={index}              
-                onClick={() => dispatch(setCurrentPage(p))}
+                onClick={() => setCurrentPage(p)}
               >
                 {" " + p}
               </span>

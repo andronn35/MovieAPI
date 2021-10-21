@@ -1,38 +1,34 @@
 import classes from "./OneFilmPage.module.css";
 import { compose } from "redux";
 import { RouteComponentProps, withRouter } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { getDetails } from "../../redux/details-reducer";
 import HeaderFilm from "../Header/HeaderFilm";
 import Preloader from "../Preloader/Preloader";
 import Comment from "../Comments/Comment";
-import { AppStateType } from "../../redux/store";
+import { useTypedSelector } from './../../hooks/useTypedSelector';
+import { useActions } from './../../hooks/useActions';
+import default_mov from '../../img/404_mov.png'
 
 const OneFilmPage: React.FC<RouteComponentProps> = (props) => {
   const movieId = (props.match.params as any).movieId;
 
-  const title = useSelector((state: AppStateType) => state.detaisPage.title);
-  const genres = useSelector((state: AppStateType) => state.detaisPage.genres);
-  const description = useSelector((state: AppStateType) => state.detaisPage.description);
-  const imgUrl = useSelector((state: AppStateType) => state.detaisPage.imgUrl);
-  const isLoding = useSelector((state: AppStateType) => state.detaisPage.isLoading);
-  const dispatch = useDispatch();
+  const {title, genres, description, imgUrl, isLoading} = useTypedSelector(state => state.details)
+  const {getDetails} = useActions()
 
   let arr = genres && genres.map((item) => "●\u00A0" + item + "\u00A0\u00A0\u00A0");
 
   useEffect(() => {
-    dispatch(getDetails(movieId));
-  }, [dispatch, movieId]);
+    getDetails(movieId);
+  }, [movieId]);
 
   const styles = {
-    backgroundImage: `url(${imgUrl})`,
+    backgroundImage: `url(${imgUrl}), url(${default_mov})`,
   };
 
   return (
     <div>
       <HeaderFilm />
-      {isLoding ? (
+      {isLoading ? (
         <Preloader />
       ) : (
         <div className={classes.oneFilmPage}>

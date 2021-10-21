@@ -1,9 +1,11 @@
+import { url } from "inspector";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import star from '../../img/star.png'
 import classes from "./FilmItem.module.css";
+import default_mov from '../../img/404_mov.png'
 
-type PropsType = {
+interface FilmItemProps {
   id: number          
   title: string
   rating: number
@@ -11,17 +13,15 @@ type PropsType = {
   medium_cover_image: string
 }
 
-const FilmItem: React.FC<PropsType> = (props) => {
+const FilmItem: React.FC<FilmItemProps> = (props) => {
   let genres = props.genres && props.genres.map((item, index) => (
     <div key={index}>{item}</div>
   ));
 
-
-
   const [buttonIsHovered, setButtonIsHovered] = useState(false);
 
   const styles = {
-    backgroundImage: `url(${props.medium_cover_image})`,
+    backgroundImage: `url(${props.medium_cover_image}), url(${default_mov})`,    
   };
 
   return (

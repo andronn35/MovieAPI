@@ -1,12 +1,11 @@
 import classes from './HeaderFilm.module.css'
-import { useSelector } from 'react-redux';
 import arrow from '../../img/arrow.png'
 import { NavLink } from 'react-router-dom';
-import { AppStateType } from '../../redux/store';
+import { useTypedSelector } from './../../hooks/useTypedSelector';
 
 const HeaderFilm: React.FC = () => {
 
-  let title = useSelector((state: AppStateType) => state.detaisPage.title)
+  const {title} = useTypedSelector(state => state.details)
 
   return(
     <div className={classes.header}>
