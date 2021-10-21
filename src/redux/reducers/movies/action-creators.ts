@@ -14,7 +14,7 @@ export const MovieActionCreators = {
   getMovies: (limit: number, currentPage: number) => {
     return (dispatch: AppDispatch) => {
       dispatch(MovieActionCreators.setIsLoading(true));
-      movieAPI.getMovies(limit, currentPage).then((data) => {debugger
+      movieAPI.getMovies(limit, currentPage).then((data) => {
         dispatch(MovieActionCreators.setIsLoading(false));
         dispatch(MovieActionCreators.setFilms(data.data.movies));      
       });
