@@ -2,31 +2,36 @@ import classes from "./Comment.module.css";
 import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
 import cross from "../../img/cross.png";
+import { IComment } from './../../models/IComment';
 
-type PropsType = {
-  movieId: number
+interface CommentProps {
+  movieId: string
 }
 
-const Comment: React.FC<PropsType> = (props) => {
+const Comment: React.FC<CommentProps> = (props) => {
 
-  let [comment, setComment] = useState<string>('');  
-  let [commentsList, setCommentsList] = useState<Array<string | number>>(    
+  let [comment, setComment] = useState<IComment>({
+    id: uuidv4(),
+    commentValue:'',
+    commentMovieId: props.movieId
+  });  
+  let [commentsList, setCommentsList] = useState<IComment[]>(    
     JSON.parse(localStorage.getItem('commentsList') || '[]')
-  );   
+  );     
 
   useEffect(() => {
     localStorage.setItem("commentsList", JSON.stringify(commentsList))    
   }, [commentsList])
 
-  let onCrossClick = (id: any) => {
-    setCommentsList(commentsList.filter((item: any) => item.id !== id))
+  let onCrossClick = (id: string) => {
+    setCommentsList(commentsList.filter((item) => item.id !== id))
   };
 
-  let showedComments = commentsList.filter((item: any) => item.commentMovieId === props.movieId) 
+  let showedComments:IComment[] = commentsList.filter((item) => item.commentMovieId === props.movieId) 
 
-  let commentElement = showedComments.map((item: any) => (
+  let commentElement = showedComments.map((item) => (
     <div className={classes.commentElement} key={item.id}>
-      <div>{item.comment}</div>
+      <div>{item.commentValue}</div>
       <div onClick={() => onCrossClick(item.id)}>
         <img src={cross} alt="cross" width="15px" height="15px" />
       </div>
@@ -34,26 +39,22 @@ const Comment: React.FC<PropsType> = (props) => {
   ));
 
   const onAddClick = () => {
-    if (comment.trim() !== '') {
+    if (comment.commentValue.trim() !== '') {
       const commentItem = {
         id: uuidv4(),
-        comment: comment,
+        commentValue: comment.commentValue,
         commentMovieId: props.movieId
       }
-      setCommentsList((commentsList: any) => [...commentsList, commentItem])
-      setComment('')
+      setCommentsList((commentsList: IComment[]) => [...commentsList, commentItem])
+      setComment({id: uuidv4(), commentValue:'', commentMovieId: props.movieId})
     }
   }
 
   let onFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    comment && setCommentsList([...commentsList, comment]);
-    setComment("");
+    comment.commentValue && setCommentsList([...commentsList, comment]);
+    setComment({id: uuidv4(), commentValue:'', commentMovieId: props.movieId});
   };
-
-  let onInputChange = (e: React.FormEvent<HTMLInputElement>) => {
-    setComment((e.target as HTMLInputElement).value);
-  };  
 
   return (
     <div className={classes.comment}>
@@ -65,8 +66,8 @@ const Comment: React.FC<PropsType> = (props) => {
         <form onSubmit={onFormSubmit}>
           <input
             type="text"
-            onChange={onInputChange}
-            value={comment}
+            onChange={e => setComment({...comment, commentValue:e.target.value})}
+            value={comment.commentValue}
             placeholder="enter comment"
           />
           <button type="submit" onClick={onAddClick}>add</button>
